@@ -1,0 +1,28 @@
+{
+  "name": "kad-traverse",
+  "version": "0.0.1",
+  "description": "nat traversal extension for kad",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/**"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/gordonhall/kad-traverse.git"
+  },
+  "keywords": [
+    "kad",
+    "nat",
+    "traverse"
+  ],
+  "author": "Gordon Hall <gordon@gordonwritescode.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://gitlab.com/gordonhall/kad-traverse/issues"
+  },
+  "homepage": "https://gitlab.com/gordonhall/kad-traverse#README",
+  "dependencies": {
+    "ip": "^1.1.0",
+    "nat-upnp": "^1.0.0"
+  }
+}
