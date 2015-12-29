@@ -17,7 +17,9 @@ module.exports = function(options) {
   options = options || {};
 
   var strategyNames = Object.keys(strategies);
-  var strategyFuncs = strategyNames.map(function(name) {
+  var strategyFuncs = strategyNames.filter(function(name) {
+    return options[name] !== false;
+  }).map(function(name) {
     return strategies[name](options[name] || {});
   });
 
