@@ -12,7 +12,8 @@ Install with NPM.
 npm install kad-traverse kad@1.2.0-beta
 ```
 
-Plugin to you Kad transport.
+Plugin to your Kad transport. (Currently only `kademlia.transports.UDP` is
+supported).
 
 ```js
 // Import required packages
@@ -46,4 +47,38 @@ parameters to pass to each traversal strategy.
   * forward - `Number`; the port to forward
   * ttl - `Number`; the time to keep port forwarded (0 for indefinite)
 * **stun**
+  * server - `Object`
+    * address - `String`; the address of the STUN server (default: 'stun.services.mozilla.com')
+    * port - `Number`; the port of the STUN server (default: 3478)
 * **turn**
+  * server - `Object`
+    * address - `String`; the address of the TURN server (default: 'turn.counterpointhackers.org')
+    * port - `Number`; the port of the TURN server (default: 3478)
+
+Strategies
+----------
+
+Kad Traverse runs as a `before:send` hook to make sure that your node can be
+reached behind a NAT. It does this by attempting 4 strategies in sequence:
+
+### None
+
+The first strategy is to simply detect whether or not the address to which your
+node is bound is already a public address. If it is not, then try the next
+strategy.
+
+### UPnP
+
+Next, we will try to use UPnP to instruct the NAT device to forward a port. If
+the NAT device does not support UPnP, then this strategy will fail.
+
+### STUN
+
+Now we want to contact a STUN server and ask it to inform us of our "server
+reflexive address and port". Once we know this information we can attempt to
+send a request to our public address. This does not work on symmetric NATs.
+
+### TURN
+
+The last strategy is to open a connection with a TURN server and use it as a
+relay for sending and receiving messages.

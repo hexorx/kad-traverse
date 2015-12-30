@@ -22,9 +22,11 @@
   },
   "homepage": "https://gitlab.com/gordonhall/kad-traverse#README",
   "dependencies": {
+    "async": "^1.5.0",
     "hat": "0.0.3",
     "ip": "^1.1.0",
     "nat-upnp": "^1.0.0",
-    "stun-js": "^0.1.2"
+    "stun-js": "^0.1.2",
+    "turn-js": "^0.1.2"
   }
 }

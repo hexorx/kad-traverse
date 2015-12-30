@@ -27,7 +27,7 @@ module.exports = function(options) {
     var transport = this;
 
     function tryStrategy(strategy, callback) {
-      strategy.call(transport, callback);
+      strategy(transport, callback);
     }
 
     async.detectSeries(strategyFuncs, tryStrategy, function() {
