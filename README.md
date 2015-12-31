@@ -9,11 +9,11 @@ Usage
 Install with NPM.
 
 ```bash
-npm install kad-traverse kad@1.2.0-beta
+npm install kad-traverse
 ```
 
-Plugin to your Kad transport. (Currently only `kademlia.transports.UDP` is
-supported).
+Simply decorate your transport adapter. (Currently only
+`kademlia.transports.UDP` is supported).
 
 ```js
 // Import required packages
@@ -26,15 +26,15 @@ var contact = kademlia.contacts.AddressPortContact({
   port: 1337
 });
 
-// Create your transport
-var transport = kademlia.transports.UDP(contact);
+// Decorate your transport
+var NatTransport = traverse.UDPTransportDecorator(kademlia.transports.UDP);
 
-// Plugin kad-traverse
-transport.before('send', traverse({
+// Create your transport with options
+var transport = new NatTransport(contact, {
   upnp: { /* options */ },
   stun: { /* options */ },
   turn: { /* options */ }
-}));
+});
 ```
 
 Options
@@ -55,11 +55,13 @@ parameters to pass to each traversal strategy.
     * address - `String`; the address of the TURN server (default: 'turn.counterpointhackers.org')
     * port - `Number`; the port of the TURN server (default: 3478)
 
+> Passing `false` for a given strategy will skip it.
+
 Strategies
 ----------
 
-Kad Traverse runs as a `before:send` hook to make sure that your node can be
-reached behind a NAT. It does this by attempting 4 strategies in sequence:
+Kad Traverse decorates your transport adapter to make sure that your node can
+be reached behind a NAT. It does this by attempting 4 strategies in sequence:
 
 ### None
 
