@@ -9,7 +9,7 @@ Usage
 Install with NPM.
 
 ```bash
-npm install kad-traverse
+npm install kad kad-traverse
 ```
 
 Simply decorate your transport adapter. (Currently only
