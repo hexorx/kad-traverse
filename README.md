@@ -31,9 +31,11 @@ var NatTransport = traverse.UDPTransportDecorator(kademlia.transports.UDP);
 
 // Create your transport with options
 var transport = new NatTransport(contact, {
-  upnp: { /* options */ },
-  stun: { /* options */ },
-  turn: { /* options */ }
+  traverse: {
+    upnp: { /* options */ },
+    stun: { /* options */ },
+    turn: { /* options */ }
+  }
 });
 ```
 
