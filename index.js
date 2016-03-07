@@ -4,4 +4,4 @@
 
 'use strict';
 
-module.exports.UDPTransportDecorator = require('./lib/transport-decorator');
+module.exports.TransportDecorator = require('./lib/transport-decorator');
