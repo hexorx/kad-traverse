@@ -21,9 +21,6 @@
     "url": "https://gitlab.com/gordonhall/kad-traverse/issues"
   },
   "homepage": "https://gitlab.com/gordonhall/kad-traverse#README",
-  "peerDependencies": {
-    "kad": "^1.5.0"
-  },
   "dependencies": {
     "async": "^1.5.0",
     "hat": "0.0.3",
