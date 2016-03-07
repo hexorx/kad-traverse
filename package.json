@@ -1,6 +1,6 @@
 {
   "name": "kad-traverse",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "nat traversal extension for kad",
   "main": "index.js",
   "scripts": {
