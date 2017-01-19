@@ -27,7 +27,7 @@ var contact = kademlia.contacts.AddressPortContact({
 });
 
 // Decorate your transport
-var NatTransport = traverse.UDPTransportDecorator(kademlia.transports.UDP);
+var NatTransport = traverse.TransportDecorator(kademlia.transports.UDP);
 
 // Create your transport with options
 var transport = new NatTransport(contact, {
