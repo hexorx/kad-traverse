@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/gordonhall/kad-traverse.git"
+    "url": "https://github.com/kadtools/kad-traverse.git"
   },
   "keywords": [
     "kad",
@@ -16,11 +16,11 @@
     "traverse"
   ],
   "author": "Gordon Hall <gordon@gordonwritescode.com>",
-  "license": "GPL-3.0",
+  "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://gitlab.com/gordonhall/kad-traverse/issues"
+    "url": "https://github.com/kadtools/kad-traverse/issues"
   },
-  "homepage": "https://gitlab.com/gordonhall/kad-traverse#README",
+  "homepage": "https://github.com/kadtools/kad-traverse#README",
   "dependencies": {
     "async": "^1.5.0",
     "hat": "0.0.3",
