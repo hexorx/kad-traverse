@@ -21,10 +21,11 @@ const kad = require('kad');
 const traverse = require('kad-traverse');
 const node = kad({ /* options */ });
 
-node.plugin(traverse.none()); // check if we are already public first
-node.plugin(traverse.upnp({ publicPort: 8080 }));
-node.plugin(traverse.natpmp({ publicPort: 8080 }));
-node.plugin(traverse.diglet());
+node.plugin(traverse([
+  new traverse.UPNPStrategy(/* options */),
+  new traverse.NATPMPStrategy(/* options */),
+  new traverse.ReverseTunnelStrategy(/* options */)
+]));
 
 node.listen(8080); // will try strategies after binding
 ```
@@ -36,7 +37,7 @@ Strategies
 * [NAT-PMP](https://en.wikipedia.org/wiki/NAT_Port_Mapping_Protocol)
 * [STUN (`UDPTransport` only)](https://en.wikipedia.org/wiki/STUN)
 * [TURN (`UDPTransport` only)](https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT)
-* [DIGLET (`HTTPTransport` only)](https://github.com/bookchin/diglet)
+* [Reverse HTTP Tunneling (`HTTPTransport` only)](https://github.com/bookchin/diglet)
 
 License
 -------
