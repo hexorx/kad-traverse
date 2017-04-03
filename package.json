@@ -4,7 +4,10 @@
   "description": "nat traversal extension for kad",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/**"
+    "test": "npm run test-suite && npm run linter",
+    "test-suite": "mocha test/** --recursive",
+    "coverage": "istanbul cover _mocha -- --recursive",
+    "linter": "eslint index.js lib test"
   },
   "repository": {
     "type": "git",
@@ -21,12 +24,13 @@
     "url": "https://github.com/kadtools/kad-traverse/issues"
   },
   "homepage": "https://github.com/kadtools/kad-traverse#README",
-  "dependencies": {
-    "async": "^1.5.0",
-    "hat": "0.0.3",
-    "ip": "^1.1.0",
-    "nat-upnp": "^1.0.0",
-    "stun-js": "^0.1.2",
-    "turn-js": "^0.1.2"
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.13.0",
+    "eslint": "^3.19.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "sinon": "^2.1.0"
   }
 }
