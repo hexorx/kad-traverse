@@ -35,8 +35,6 @@ Strategies
 
 * [UPNP](https://en.wikipedia.org/wiki/Universal_Plug_and_Play)
 * [NAT-PMP](https://en.wikipedia.org/wiki/NAT_Port_Mapping_Protocol)
-* [STUN (`UDPTransport` only)](https://en.wikipedia.org/wiki/STUN)
-* [TURN (`UDPTransport` only)](https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT)
 * [Reverse HTTP Tunneling (`HTTPTransport` only)](https://github.com/bookchin/diglet)
 
 License
