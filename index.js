@@ -4,9 +4,9 @@
 
 'use strict';
 
-module.exports = function(options) {
+module.exports = function(strategies) {
   return function(node) {
-    return new module.exports.TraversePlugin(node, options);
+    return new module.exports.TraversePlugin(node, strategies);
   };
 };
 
