@@ -26,6 +26,7 @@
   "homepage": "https://github.com/kadtools/kad-traverse#README",
   "dependencies": {
     "async": "^2.3.0",
+    "concat-stream": "^1.6.0",
     "diglet": "^1.0.6",
     "ip": "^1.1.5",
     "nat-pmp": "^1.0.0",
