@@ -29,6 +29,7 @@
     "concat-stream": "^1.6.0",
     "diglet": "^1.0.6",
     "ip": "^1.1.5",
+    "merge": "^1.2.0",
     "nat-pmp": "^1.0.0",
     "nat-upnp": "^1.1.0",
     "network": "^0.3.2"
