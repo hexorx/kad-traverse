@@ -1,6 +1,10 @@
 Kad Traverse
 ============
 
+[![Build Status](https://img.shields.io/travis/kadtools/kad-traverse/master.svg?style=flat-square)](https://travis-ci.org/kadtools/kad-traverse)
+[![Coverage Status](https://img.shields.io/coveralls/kadtools/kad-traverse.svg?style=flat-square)](https://coveralls.io/r/kadtools/kad-traverse)
+[![NPM](https://img.shields.io/npm/v/kad-traverse.svg?style=flat-square)](https://www.npmjs.com/package/kad-traverse)
+
 NAT traversal extension for [Kad](https://github.com/kadtools/kad).
 
 Usage
