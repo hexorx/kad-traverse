@@ -17,14 +17,14 @@ describe('NATPMPStrategy', function() {
             externalIp: sinon.stub().callsArgWith(0, null, {
               ip: ['some', 'ip', 'addr']
             })
-          }),
-          network: {
-            get_gateway_ip: sinon.stub().callsArgWith(
-              0,
-              null,
-              'gateway.ip.addr'
-            )
-          }
+          })
+        },
+        network: {
+          get_gateway_ip: sinon.stub().callsArgWith(
+            0,
+            null,
+            'gateway.ip.addr'
+          )
         }
       });
       let strategy = new NATPMPStrategy({ publicPort: 8081 });
@@ -46,14 +46,14 @@ describe('NATPMPStrategy', function() {
               0,
               new Error('Failed to get IP')
             )
-          }),
-          network: {
-            get_gateway_ip: sinon.stub().callsArgWith(
-              0,
-              null,
-              'gateway.ip.addr'
-            )
-          }
+          })
+        },
+        network: {
+          get_gateway_ip: sinon.stub().callsArgWith(
+            0,
+            null,
+            'gateway.ip.addr'
+          )
         }
       });
       let strategy = new NATPMPStrategy();
