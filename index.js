@@ -4,4 +4,10 @@
 
 'use strict';
 
-module.exports.TransportDecorator = require('./lib/transport-decorator');
+module.exports = function(strategies) {
+  return function(node) {
+    return new module.exports.TraversePlugin(node, strategies);
+  };
+};
+
+module.exports.TraversePlugin = require('./lib/plugin-traverse');

@@ -1,88 +1,59 @@
 Kad Traverse
 ============
 
-NAT traversal extension for [Kad](https://github.com/gordonwritescode/kad).
+NAT traversal extension for [Kad](https://github.com/kadtools/kad).
 
 Usage
 -----
 
-Install with NPM.
+Install kad-traverse with NPM.
 
 ```bash
-npm install kad kad-traverse
+npm install kad-traverse --save
 ```
 
-Simply decorate your transport adapter. (Currently only
-`kademlia.transports.UDP` is supported).
+Register the desired traversal strategy plugins *in the order you wish to 
+attempt them*. If one succeeds, then strategies registered after will not 
+execute.
 
 ```js
-// Import required packages
-var kademlia = require('kad');
-var traverse = require('kad-traverse');
+const kad = require('kad');
+const traverse = require('kad-traverse');
+const node = kad({ /* options */ });
 
-// Create your contact
-var contact = kademlia.contacts.AddressPortContact({
-  address: '127.0.0.0',
-  port: 1337
-});
+node.plugin(traverse([
+  new traverse.UPNPStrategy(/* options */),
+  new traverse.NATPMPStrategy(/* options */),
+  new traverse.ReverseTunnelStrategy(/* options */)
+]));
 
-// Decorate your transport
-var NatTransport = traverse.TransportDecorator(kademlia.transports.UDP);
-
-// Create your transport with options
-var transport = new NatTransport(contact, {
-  traverse: {
-    upnp: { /* options */ },
-    stun: { /* options */ },
-    turn: { /* options */ }
-  }
-});
+node.listen(8080); // will try strategies after binding
 ```
-
-Options
--------
-
-The `traverse(options)` function accepts a dictionary containing optional
-parameters to pass to each traversal strategy.
-
-* **upnp**
-  * forward - `Number`; the port to forward
-  * ttl - `Number`; the time to keep port forwarded (0 for indefinite)
-* **stun**
-  * server - `Object`
-    * address - `String`; the address of the STUN server (default: 'stun.services.mozilla.com')
-    * port - `Number`; the port of the STUN server (default: 3478)
-* **turn**
-  * server - `Object`
-    * address - `String`; the address of the TURN server (default: 'turn.counterpointhackers.org')
-    * port - `Number`; the port of the TURN server (default: 3478)
-
-> Passing `false` for a given strategy will skip it.
 
 Strategies
 ----------
 
-Kad Traverse decorates your transport adapter to make sure that your node can
-be reached behind a NAT. It does this by attempting 4 strategies in sequence:
+* [UPNP](https://en.wikipedia.org/wiki/Universal_Plug_and_Play)
+* [NAT-PMP](https://en.wikipedia.org/wiki/NAT_Port_Mapping_Protocol)
+* [Reverse HTTP Tunneling (`HTTPTransport` only)](https://github.com/bookchin/diglet)
 
-### None
+License
+-------
 
-The first strategy is to simply detect whether or not the address to which your
-node is bound is already a public address. If it is not, then try the next
-strategy.
+Kad Traverse - NAT traversal plugins for Kad  
+Copyright (C) 2017 Gordon Hall
 
-### UPnP
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-Next, we will try to use UPnP to instruct the NAT device to forward a port. If
-the NAT device does not support UPnP, then this strategy will fail.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
 
-### STUN
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see http://www.gnu.org/licenses/.
 
-Now we want to contact a STUN server and ask it to inform us of our "server
-reflexive address and port". Once we know this information we can attempt to
-send a request to our public address. This does not work on symmetric NATs.
 
-### TURN
-
-The last strategy is to open a connection with a TURN server and use it as a
-relay for sending and receiving messages.

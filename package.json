@@ -1,14 +1,17 @@
 {
   "name": "kad-traverse",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "nat traversal extension for kad",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/**"
+    "test": "npm run test-suite && npm run linter",
+    "test-suite": "mocha test/** --recursive",
+    "coverage": "istanbul cover _mocha -- --recursive",
+    "linter": "eslint index.js lib test"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/gordonhall/kad-traverse.git"
+    "url": "https://github.com/kadtools/kad-traverse.git"
   },
   "keywords": [
     "kad",
@@ -16,17 +19,28 @@
     "traverse"
   ],
   "author": "Gordon Hall <gordon@gordonwritescode.com>",
-  "license": "GPL-3.0",
+  "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://gitlab.com/gordonhall/kad-traverse/issues"
+    "url": "https://github.com/kadtools/kad-traverse/issues"
   },
-  "homepage": "https://gitlab.com/gordonhall/kad-traverse#README",
+  "homepage": "https://github.com/kadtools/kad-traverse#README",
   "dependencies": {
-    "async": "^1.5.0",
-    "hat": "0.0.3",
-    "ip": "^1.1.0",
-    "nat-upnp": "^1.0.0",
-    "stun-js": "^0.1.2",
-    "turn-js": "^0.1.2"
+    "async": "^2.3.0",
+    "concat-stream": "^1.6.0",
+    "diglet": "^1.0.6",
+    "ip": "^1.1.5",
+    "merge": "^1.2.0",
+    "nat-pmp": "^1.0.0",
+    "nat-upnp": "^1.1.0",
+    "network": "^0.3.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.13.0",
+    "eslint": "^3.19.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "proxyquire": "^1.7.11",
+    "sinon": "^2.1.0"
   }
 }
