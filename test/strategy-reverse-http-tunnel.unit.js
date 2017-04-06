@@ -6,12 +6,12 @@ const { expect } = require('chai');
 const proxyquire = require('proxyquire');
 
 
-describe('ReverseHTTPTunnelStrategy', function() {
+describe('ReverseTunnelStrategy', function() {
 
   describe('@method exec', function() {
 
     it('should error if parse fails', function(done) {
-      let Strategy = proxyquire('../lib/strategy-reverse-http-tunnel', {
+      let Strategy = proxyquire('../lib/strategy-reverse-tunnel', {
         http: {
           request: function(opts, handler) {
             let data = ['{', 'invalid', 'json'];
@@ -35,7 +35,7 @@ describe('ReverseHTTPTunnelStrategy', function() {
     });
 
     it('should error if status code not 200', function(done) {
-      let Strategy = proxyquire('../lib/strategy-reverse-http-tunnel', {
+      let Strategy = proxyquire('../lib/strategy-reverse-tunnel', {
         http: {
           request: function(opts, handler) {
             let data = [JSON.stringify({ error: 'unknown' })];
@@ -62,7 +62,7 @@ describe('ReverseHTTPTunnelStrategy', function() {
 
     it('should update the contact info', function(done) {
       let open = sinon.stub();
-      let Strategy = proxyquire('../lib/strategy-reverse-http-tunnel', {
+      let Strategy = proxyquire('../lib/strategy-reverse-tunnel', {
         http: {
           request: function(opts, handler) {
             let data = [JSON.stringify({
