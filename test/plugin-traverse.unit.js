@@ -190,6 +190,37 @@ describe('TraversePlugin', function() {
       });
     });
 
+    it('should set test interval and rety traversal if fail', function(done) {
+      let clock = sandbox.useFakeTimers('setInterval');
+      let listen = sandbox.stub().callsArg(1);
+      let info = sandbox.stub();
+      let warn = sandbox.stub();
+      let node = {
+        contact: { hostname: '127.0.0.1', port: 8080 },
+        listen,
+        logger: { info, warn }
+      };
+      let plugin = new TraversePlugin(node);
+      let _testIfReachable = sandbox.stub(
+        plugin,
+        '_testIfReachable'
+      ).callsArgWith(0, null, true);
+      _testIfReachable.onCall(1).callsArgWith(0, null, false);
+      let _execTraversalStrategies = sandbox.stub(
+        plugin,
+        '_execTraversalStrategies'
+      ).callsArgWith(0, null, true);
+      node.listen(8080, () => {
+        expect(info.called).to.equal(true);
+        expect(plugin._testInterval).to.not.equal(undefined);
+        expect(_execTraversalStrategies.callCount).to.equal(1);
+        clock.tick(1200000);
+        expect(_execTraversalStrategies.callCount).to.equal(2);
+        expect(warn.called).to.equal(true);
+        done();
+      });
+    });
+
     after(() => sandbox.restore());
 
   });
